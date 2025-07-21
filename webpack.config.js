@@ -11,6 +11,7 @@ module.exports = {
     mode: "development", // Use 'production' for optimized builds
     module: {
         rules: [
+            // JS loader (Babel)
             {
                 test: /\.js$/, // Apply this rule to all .js files
                 exclude: /node_modules/, // Except files inside node_modules
@@ -18,6 +19,11 @@ module.exports = {
                     loader: "babel-loader", // Use Babel to transpile JS files
                 },
             },
+            // CSS loaders
+            {
+                test: /\.css$/i,
+                use: ["style-loader", "css-loader"], // Use style-loader and css-loader for CSS files
+            }
         ],
     },
     plugins: [
