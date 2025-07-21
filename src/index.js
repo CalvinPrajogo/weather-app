@@ -12,3 +12,9 @@ async function getWeatherData(city) {
         console.error("Error fetching weather data:", error);
     }
 }
+
+const city_button = document.getElementById("getWeatherBtn");
+city_button.addEventListener("click", () => {
+    const city = document.getElementById("cityInput").value.toLowerCase();
+    getWeatherData(city);
+})
