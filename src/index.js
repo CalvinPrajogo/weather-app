@@ -13,6 +13,30 @@ async function getWeatherData(city) {
     }
 }
 
+// Function to process JSON data and return object with relevant data
+function processWeatherData(data) {
+    // Current weather data
+    const location = data.resolvedAddress;
+    const currentConditions = data.currentConditions;
+    const currentTemp = currentConditions.temp;
+
+    // Get data for the next 7 days
+    const forecast = data.days
+        .slice(0, 7)
+        .map(day => ({
+            date: day.datetime,
+            tempHigh: day.tempmax,
+            tempLow: day.tempmin,
+            conditions: day.conditions
+        }));
+    
+    return {
+        location,
+        currentTemp,
+        forecast
+    };
+}
+
 const city_button = document.getElementById("getWeatherBtn");
 city_button.addEventListener("click", () => {
     const city = document.getElementById("cityInput").value.toLowerCase();
