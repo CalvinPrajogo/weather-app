@@ -37,5 +37,6 @@ module.exports = {
         open: true, // Automatically open the browser when server starts
         hot: true, // Enable Hot Module Replacement (live reloading)
         port: 3000, // Port for the dev server (default 8080 if not specified)
+        watchFiles: ["src/**/*.html"], // Watch for changes in HTML files in src -> Live reload on changes
     },
 };
