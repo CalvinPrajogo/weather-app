@@ -37,6 +37,38 @@ function processWeatherData(data) {
     };
 }
 
+// Function to display weather data on the page
+function displayWeatherData(weather) {
+    const currentDiv = document.getElementById("currentWeather");
+    const forecastDiv = document.getElementById("forecastWeather");
+
+    // Clear previous content
+    currentDiv.innerHTML = "";
+    forecastDiv.innerHTML = "";
+
+    // Display current weather
+    const currentHTML = `
+        <h2>Current Weather for ${weather.location}</h2>
+        <p>Temperature: ${weather.currentTemp}°F</p>
+    `;
+    currentDiv.innerHTML = currentHTML;
+
+    // 7-day Forecast
+    const forecastHTML = weather.forecast.map(day => {
+        return `
+            <div class="forecast-day">
+                <p>${day.date}</p>
+                <p>High: ${day.tempHigh}</p>
+                <p>Low: ${day.tempLow}</p>
+                <p>Conditions: ${day.conditions}</p>
+            </div>
+        `;
+    }).join(""); // Take the new array of strings and combine into one string
+
+    forecastDiv.innerHTML = `<h2>7-Day Forecast</h2>${forecastHTML}`;
+}
+
+
 const city_button = document.getElementById("getWeatherBtn");
 city_button.addEventListener("click", () => {
     const city = document.getElementById("cityInput").value.toLowerCase();
