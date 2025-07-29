@@ -7,7 +7,8 @@ async function getWeatherData(city) {
             throw new Error("HTTP Error: " + response.status);
         }
         const data = await response.json();
-        console.log("Weather data for", city, ":", data);
+        const processed = processWeatherData(data);
+        displayWeatherData(processed);
     } catch (error) {
         console.error("Error fetching weather data:", error);
     }
