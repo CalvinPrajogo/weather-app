@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Oxygen:wght@300;400;700&display=swap');
+
+body {
+    font-family: "Oxygen", sans-serif;
+}
+
+#header {
+    text-align: center;
+}
+
+#search {
+    text-align: center;
+}
+
+#currentWeather {
+    text-align: center;
+}
+
+
+#forecastWeather {
+    text-align: center;
+}
+
+#forecastCards {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.forecast-day {
+    flex: 1 1 auto;
+    max-width: 200px;
+}

@@ -41,7 +41,7 @@ function processWeatherData(data) {
 // Function to display weather data on the page
 function displayWeatherData(weather) {
     const currentDiv = document.getElementById("currentWeather");
-    const forecastDiv = document.getElementById("forecastWeather");
+    const forecastDiv = document.getElementById("forecastCards");
 
     // Clear previous content
     currentDiv.innerHTML = "";
@@ -66,7 +66,7 @@ function displayWeatherData(weather) {
         `;
     }).join(""); // Take the new array of strings and combine into one string
 
-    forecastDiv.innerHTML = `<h2>7-Day Forecast</h2>${forecastHTML}`;
+    forecastDiv.innerHTML = forecastHTML;
 }
 
 
