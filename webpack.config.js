@@ -5,7 +5,7 @@ module.exports = {
     entry: "./src/index.js", // Your main JS file — where Webpack starts bundling
     output: {
         filename: "bundle.js", // The name of the output file after bundling
-        path: path.resolve(__dirname, "dist"), // Output folder (absolute path)
+        path: path.resolve(__dirname, "docs"), // Output folder (absolute path)
         clean: true, // Clean the output folder before each build
     },
     mode: "development", // Use 'production' for optimized builds
@@ -37,7 +37,7 @@ module.exports = {
         }),
     ],
     devServer: {
-        static: "./dist", // Serve files from the dist folder
+        static: "./docs", // Serve files from the docs folder
         open: true, // Automatically open the browser when server starts
         hot: true, // Enable Hot Module Replacement (live reloading)
         port: 3000, // Port for the dev server (default 8080 if not specified)
