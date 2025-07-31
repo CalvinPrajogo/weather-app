@@ -30,4 +30,10 @@ body {
 .forecast-day {
     flex: 1 1 auto;
     max-width: 200px;
+    border: 1px solid lightblue;
+}
+
+.weather-icon {
+    width: 200px;
+    height: 200px;
 }

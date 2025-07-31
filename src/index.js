@@ -1,4 +1,8 @@
 import "./style.css"; // Importing the CSS file to apply styles
+import partlyCloudy from "./assets/icons/wi-day-cloudy.svg";
+import clearSky from "./assets/icons/wi-day-sunny.svg";
+import rain from "./assets/icons/wi-rain.svg";
+import snow from "./assets/icons/wi-snow.svg";
 
 async function getWeatherData(city) {
     try {
@@ -20,6 +24,7 @@ function processWeatherData(data) {
     const location = data.resolvedAddress;
     const currentConditions = data.currentConditions;
     const currentTemp = currentConditions.temp;
+    const currentCond = currentConditions.conditions;
 
     // Get data for the next 7 days
     const forecast = data.days
@@ -34,6 +39,7 @@ function processWeatherData(data) {
     return {
         location,
         currentTemp,
+        currentCond,
         forecast
     };
 }
@@ -47,21 +53,25 @@ function displayWeatherData(weather) {
     currentDiv.innerHTML = "";
     forecastDiv.innerHTML = "";
 
+    const currentIconPath = mapWeatherIcons(weather.currentCond);
+
     // Display current weather
     const currentHTML = `
         <h2>Current Weather for ${weather.location}</h2>
         <p>Temperature: ${weather.currentTemp}°F</p>
+        <img class="weather-icon"src="${currentIconPath}" alt="${weather.currentCond}">
     `;
     currentDiv.innerHTML = currentHTML;
 
     // 7-day Forecast
     const forecastHTML = weather.forecast.map(day => {
+        const iconPath = mapWeatherIcons(day.conditions);
         return `
             <div class="forecast-day">
                 <p>${day.date}</p>
                 <p>High: ${day.tempHigh}</p>
                 <p>Low: ${day.tempLow}</p>
-                <p>Conditions: ${day.conditions}</p>
+                <img src="${iconPath}" alt="${day.conditions}">
             </div>
         `;
     }).join(""); // Take the new array of strings and combine into one string
@@ -69,6 +79,22 @@ function displayWeatherData(weather) {
     forecastDiv.innerHTML = forecastHTML;
 }
 
+function mapWeatherIcons(condition) { // Map conditions from api to icons in assets
+    const lowerCondition = condition.toLowerCase();
+    if (lowerCondition.includes("clear")) {
+        return clearSky;
+    }
+    if (lowerCondition.includes("cloudy")) {
+        return partlyCloudy;
+    }
+    if (lowerCondition.includes("rain")) {
+        return rain;
+    }
+    if (lowerCondition.includes("snow")) {
+        return snow;
+    }
+    return clearSky; // Default icon if no match found
+}
 
 const city_button = document.getElementById("getWeatherBtn");
 city_button.addEventListener("click", () => {
